@@ -1,0 +1,31 @@
+.work_container{
+    background-color: #111430;
+    padding:70px 0;
+    margin-right: 0;
+}
+.rec-carousel-item .sc-gtssRu{    
+    height:350px!important;
+}
+
+.carousel_img{
+    width:100%;
+    height:350px;
+    padding: 0;
+    margin: 0;
+    object-fit: cover!important;
+    object-position: center !important;
+}
+
+.ikyGAt{
+    background-color: #242A65!important;
+    box-shadow: 0 0 1px 2px rgba(255, 255, 255, 0.5)!important;
+}
+
+.brcpxa{
+    box-shadow: 0 0 1px 3px  #FBD062!important;
+    background-color: #f7cd62!important;
+}
+
+.sc-iCoHVE.kRlYRh.rec.rec-pagination {
+    margin-top: 70px;
+}

@@ -1,0 +1,7 @@
+.form-group .form-control{
+    border: none;
+    border-radius: 0;
+}
+.form-group .form-control::placeholder{
+    color: rgb(180, 180, 180);
+}
