@@ -12,9 +12,9 @@ const FooterForm = () => {
                     <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Your name / Company's name"/>
                 </div>
                 <div class="form-group">
-                <textarea  class="form-control" placeholder='Your massage' rows="8" />
+                    <textarea  class="form-control" placeholder='Your massage' rows="8" />
                 </div>
-                <button type="submit" class="btn_brand">Submit</button>
+                <input type='submit' class="btn_brand" value='Send'/>
             </form>
         </div>
     );

@@ -9,7 +9,7 @@ import './BusinessLogo.css';
 const BusinessLogo = () => {
     return (
         <section>
-            <div className="container mt-5 mb-5">
+            <div className="container mt-5 mb-5 pb-5">
                 <div className="row d-flex align-items-center logo_container">
                     <div className="col-md-2 mr-3 ml-3 col-sm-3">
                         <img src={slack} alt="slack" className="img-fluid"/>

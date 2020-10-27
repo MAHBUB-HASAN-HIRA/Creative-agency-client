@@ -25,14 +25,14 @@ const Review = () => {
             title:'CEO Manpol',
             img:customer3,
             review_text:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores molestiae ipsum doloribus delectus voluptas. Reiciendis voluptatibus ipsam dolore quaerat officia.'
-        },
+        }
 
     ]
     const breakPoints = [
         { width: 1, itemsToShow: 1 },
         { width: 550, itemsToShow: 2, itemsToScroll: 1 },
         { width: 768, itemsToShow: 3 },
-        { width: 1200, itemsToShow: 3, itemsToScroll: 1 }
+        { width: 1200, itemsToShow: 1, itemsToScroll: 1 }
       ];
 
     return (

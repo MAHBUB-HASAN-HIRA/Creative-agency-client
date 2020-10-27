@@ -28,7 +28,7 @@ const Services = () => {
     return (
         <section className='mt-5 pt-5 mb-5 pb-5'>
            <div className='container'>
-                <h3 className='text-center'>Provide Awesome <span style={{color:'#7AB259'}}>Services</span></h3>
+                <h1 className='text-center'>Provide Awesome <span style={{color:'#7AB259'}}>Services</span></h1>
                 <div className="row mt-5 mb-5">
                     {
                         services.map(service => <ServicesCard service={service}/>)

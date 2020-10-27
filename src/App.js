@@ -8,6 +8,9 @@ import {
 } from "react-router-dom";
 
 import './App.css';
+import CustomerReview from "./Components/Customer/CustomerReview/CustomerReview";
+import CustomerServiceList from "./Components/Customer/CustomerServiceList/CustomerServiceList/CustomerServiceList";
+import Order from "./Components/Customer/Order/Order";
 import Home from "./Components/Home/Home/Home";
 import Login from "./Components/Login/Login";
 import NotFound from "./Components/NotFound/NotFound";
@@ -22,6 +25,15 @@ function App() {
       <Switch>
         <Route exact path='/'>
           <Home/>
+        </Route>
+        <Route path='/customer/order'>
+          <Order/>
+        </Route>
+        <Route path='/customer/serviceList'>
+          <CustomerServiceList/>
+        </Route>
+        <Route path='/customer/review'>
+          <CustomerReview/>
         </Route>
         <Route path='/login'>
           <Login/>
