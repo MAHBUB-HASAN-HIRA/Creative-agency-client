@@ -2,6 +2,7 @@
     border-color:#ffffff ;
     cursor: pointer;
     transition:.5s;
+    padding-top:30px;
 }
 
 .service_card:hover{
@@ -10,3 +11,22 @@
     box-shadow: 0px 4px 80px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
 }
+
+.card_link{
+    text-decoration: none!important;
+    color: #000000; 
+}
+.card_link:hover{
+    text-decoration: none!important;
+    color: #000000; 
+}
+
+.service_card img {
+    border-radius: 50%;
+    -webkit-transition: -webkit-transform .8s ease-in-out;
+            transition:         transform .8s ease-in-out;
+  }
+  .service_card img:hover {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }

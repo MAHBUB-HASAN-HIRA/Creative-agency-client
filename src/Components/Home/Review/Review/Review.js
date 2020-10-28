@@ -1,33 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReviewCard from '../ReviewCard/ReviewCard';
-import customer1 from '../../../../creative-agency-resources/images/customer-1.png';
-import customer2 from '../../../../creative-agency-resources/images/customer-2.png';
-import customer3 from '../../../../creative-agency-resources/images/customer-3.png';
 import Carousel from 'react-elastic-carousel';
+import loadSpiner from '../../../../creative-agency-resources/images/loadSpiner.gif';
 
 const Review = () => {
+    const [reviewerInfo, setReviewerInfo] = useState([]);
 
-    const reviewerInfo = [
-        {
-            name:'Nash Patik',
-            title:'CEO Manpol',
-            img:customer1,
-            review_text:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores molestiae ipsum doloribus delectus voluptas. Reiciendis voluptatibus ipsam dolore quaerat officia.'
-        },
-        {
-            name:'Nash Patik',
-            title:'CEO Manpol',
-            img:customer2,
-            review_text:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores molestiae ipsum doloribus delectus voluptas. Reiciendis voluptatibus ipsam dolore quaerat officia.'
-        },
-        {
-            name:'Nash Patik',
-            title:'CEO Manpol',
-            img:customer3,
-            review_text:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores molestiae ipsum doloribus delectus voluptas. Reiciendis voluptatibus ipsam dolore quaerat officia.'
-        }
+    useEffect(() => {
+        fetch('http://localhost:5000/review')
+        .then(res => res.json())
+        .then(data => {
+          if(data){
+            setReviewerInfo(data);
+          }});
+    },[])
 
-    ]
     const breakPoints = [
         { width: 1, itemsToShow: 1 },
         { width: 550, itemsToShow: 2, itemsToScroll: 1 },
@@ -40,15 +27,22 @@ const Review = () => {
             <div className="container">
                 <h1 className='text-center'>Clients <span style={{color:'#7AB259'}}>Feedback</span></h1>
                 <div className="row mt-5 mb-5">
-                <Carousel enableAutoPlay enableSwipe={true} 
-                autoPlaySpeed={2000} breakPoints={breakPoints}
-            >
-                
-                    { 
-                        reviewerInfo.map(review => <ReviewCard review={review}/>)
+                        
+                    { reviewerInfo.length > 0 ?
+
+                        <Carousel enableAutoPlay enableSwipe={true} 
+                        autoPlaySpeed={2000} breakPoints={breakPoints}
+                        > 
+                            {
+                                reviewerInfo.map(review => <ReviewCard key={review._id} review={review}/>)
+                            }
+                            
+                        </Carousel>
+                        :
+                        <div className='text-center w-100'>
+                            <img className='loading_spin' src={loadSpiner} alt="loading"/>
+                        </div>
                     }
-                
-                </Carousel>
                 </div>
             </div>
         </section>

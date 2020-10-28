@@ -31,7 +31,7 @@ const Services = () => {
                 <h1 className='text-center'>Provide Awesome <span style={{color:'#7AB259'}}>Services</span></h1>
                 <div className="row mt-5 mb-5">
                     {
-                        services.map(service => <ServicesCard service={service}/>)
+                        services.slice(0,6).map(service => <ServicesCard service={service}/>)
                     }
                 </div>
            </div>

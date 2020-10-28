@@ -43,7 +43,7 @@ const Nav = () => {
                             <Link onClick={handleCategories} className="nav-link" to='#'>Contact Us</Link>
                         </li>
                         <li>
-                            <Link onClick={handleCategories} className="btn_brand" to='#'>Login</Link>
+                            <Link onClick={handleCategories} className="btn_brand" to='/login'>Login</Link>
                         </li>
                     </ul>
                 </div>

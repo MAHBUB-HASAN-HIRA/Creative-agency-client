@@ -13,7 +13,7 @@ const Sidebar = () => {
                     <Link to='/'><img className='w-100 site_logo' src={logo} alt=""/></Link>
                 </div>
                 <div className='mt-5 sidebar_option'>
-                    {/* <ul className='for_customer'>
+                    <ul className='for_customer'>
                         <li>
                             <Link className='sidebar_link' to="/customer/order"><FontAwesomeIcon icon={faShoppingCart} /> Order</Link>
                         </li>
@@ -23,8 +23,8 @@ const Sidebar = () => {
                         <li>
                             <Link className='sidebar_link' to="/customer/review"><FontAwesomeIcon icon={faCommentAlt}/> Review</Link>
                         </li>
-                    </ul> */}
-                    <ul className='for_admin'>
+                    </ul>
+                    {/* <ul className='for_admin'>
                         <li>
                             <Link className='sidebar_link' to="/admin/serviceList"><FontAwesomeIcon icon={faGripVertical}/> Service list</Link>
                         </li>
@@ -34,7 +34,7 @@ const Sidebar = () => {
                         <li>
                             <Link className='sidebar_link' to="/admin/makeAdmin"><FontAwesomeIcon icon={faUserPlus}/> Make Admin</Link>
                         </li>
-                    </ul>
+                    </ul> */}
                 </div>
             </div>
         </div>

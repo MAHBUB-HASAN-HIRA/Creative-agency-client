@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Sidebar from '../../../Common/Sidebar/Sidebar';
 import services1 from '../../../../creative-agency-resources/images/icons/service1.png';
 import services2 from '../../../../creative-agency-resources/images/icons/service2.png';
 import services3 from '../../../../creative-agency-resources/images/icons/service3.png';
 import CustomerServiceListCard from '../CustomerServiceListCard/CustomerServiceListCard'
+import { UserContext } from '../../../../App';
 
 const CustomerServiceList = () => {
-
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const servicesLists = [
         {
             title:'Web & Mobile Design',
@@ -49,7 +50,7 @@ const CustomerServiceList = () => {
              <div className="col-md-10 pl-5">
                  <div className=' d-flex align-items-center justify-content-between mt-3 mb-3 pl-3 pr-3'>
                      <h3>Service List</h3>
-                     <h5>Mahbub Hasan</h5>
+                     <h5>{loggedInUser.name}</h5>
                  </div>
                  <div  className='dashboard_right_container'>
                      <div className="row">
