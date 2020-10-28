@@ -1,0 +1,27 @@
+.table_container{
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding:30px 20px;
+}
+.table_header{
+    background-color: #F5F6FA;
+}
+
+.Pending{
+    cursor: pointer;
+    border: none;
+    color: #FF4545;
+    background-color: #ffffff;
+}
+.Done{
+    cursor: pointer;
+    border: none;
+    color: #009444;
+    background-color:  #ffffff;
+}
+.ongoing{
+    cursor: pointer;
+    border: none;
+    color:#ffa600;
+    background-color:  #ffffffea;
+}

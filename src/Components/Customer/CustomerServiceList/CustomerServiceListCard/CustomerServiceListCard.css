@@ -1,6 +1,5 @@
 .status_contain{
     width: 108px;
-    height: 40px;
     text-align: center;
     padding:10px;
     margin-right: 20px;
@@ -11,10 +10,12 @@
     color: #FF4545;
     background-color: #FFE3E3;
 }
+
 .done{
     color: #009444;
     background-color:  #C6FFE0;
 }
+
 .on_going{
     color:#ffa600;
     background-color:  #ffeab3ea;

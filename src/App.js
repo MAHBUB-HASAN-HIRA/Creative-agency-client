@@ -8,6 +8,9 @@ import {
 } from "react-router-dom";
 
 import './App.css';
+import AddService from "./Components/Admin/AddServices/AddService/AddService";
+import AdminServiceList from "./Components/Admin/AdminServiceList/AdminServiceList/AdminServiceList";
+import MakeAdmin from "./Components/Admin/MakeAdmin/MakeAdmin";
 import CustomerReview from "./Components/Customer/CustomerReview/CustomerReview";
 import CustomerServiceList from "./Components/Customer/CustomerServiceList/CustomerServiceList/CustomerServiceList";
 import Order from "./Components/Customer/Order/Order";
@@ -35,6 +38,15 @@ function App() {
         <Route path='/customer/review'>
           <CustomerReview/>
         </Route>
+          <Route path='/admin/serviceList'>
+            <AdminServiceList/>
+          </Route>
+          <Route path='/admin/addService'>
+            <AddService/>
+          </Route>
+          <Route path='/admin/makeAdmin'>
+            <MakeAdmin/>
+          </Route>
         <Route path='/login'>
           <Login/>
         </Route>
