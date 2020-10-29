@@ -2,7 +2,7 @@ import React from 'react';
 import './CustomerServiceListCard.css'
 
 const CustomerServiceListCard = ({serviceList}) => {
-    console.log(serviceList);
+    
     let customColor = 'status_contain';
 
     if(serviceList.status === 'Pending'){

@@ -11,7 +11,7 @@ const MakeAdminForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch('http://localhost:5000/makeAdmin', {
+        fetch('https://creative-agency-101.herokuapp.com/makeAdmin', {
                 method:'POST',
                 headers:{'Content-Type': 'application/json'},
                 body:JSON.stringify(adminEmail)

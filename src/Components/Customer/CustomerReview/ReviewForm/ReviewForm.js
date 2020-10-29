@@ -12,7 +12,7 @@ const ReviewForm = ({loggedInUser}) => {
 
      const handleSubmit = (e) => {
          e.preventDefault();
-         fetch('http://localhost:5000/review', {
+         fetch('https://creative-agency-101.herokuapp.com/review', {
                 method:'POST',
                 headers:{'Content-Type': 'application/json'},
                 body:JSON.stringify(review)

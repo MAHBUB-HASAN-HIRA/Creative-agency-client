@@ -8,6 +8,7 @@ import './App.css';
 import AddService from "./Components/Admin/AddServices/AddService/AddService";
 import AdminServiceList from "./Components/Admin/AdminServiceList/AdminServiceList/AdminServiceList";
 import MakeAdmin from "./Components/Admin/MakeAdmin/MakeAdmin";
+import CheckAdmin from "./Components/CheckAdmin/CheckAdmin";
 import CustomerReview from "./Components/Customer/CustomerReview/CustomerReview";
 import CustomerServiceList from "./Components/Customer/CustomerServiceList/CustomerServiceList/CustomerServiceList";
 import Order from "./Components/Customer/Order/Order";
@@ -20,16 +21,18 @@ export const UserContext = createContext();
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
-
+  
   useEffect(() => {
     const userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
     if(userInfo){
      setLoggedInUser(userInfo); 
     }
+
   },[])
 
   return (
     <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
+    <CheckAdmin>
     <Router>
       <Switch>
         <Route exact path='/'>
@@ -44,15 +47,15 @@ function App() {
         <PrivateRoute path='/customer/review'>
           <CustomerReview/>
         </PrivateRoute>
-          <Route path='/admin/serviceList'>
+          <PrivateRoute path='/admin/serviceList'>
             <AdminServiceList/>
-          </Route>
-          <Route path='/admin/addService'>
+          </PrivateRoute>
+          <PrivateRoute path='/admin/addService'>
             <AddService/>
-          </Route>
-          <Route path='/admin/makeAdmin'>
+          </PrivateRoute>
+          <PrivateRoute path='/admin/makeAdmin'>
             <MakeAdmin/>
-          </Route>
+          </PrivateRoute>
         <Route path='/login'>
           <Login/>
         </Route>
@@ -61,6 +64,7 @@ function App() {
         </Route>
       </Switch>
     </Router>
+    </CheckAdmin>
     </UserContext.Provider>
   );
 }

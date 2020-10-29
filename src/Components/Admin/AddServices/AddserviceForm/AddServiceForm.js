@@ -25,17 +25,16 @@ const AddServiceForm = () => {
         formData.append('title', addService.title);
         formData.append('description', addService.description);
         
-            fetch('http://localhost:5000/addService', {
+            fetch('https://creative-agency-101.herokuapp.com/addService', {
                 method: 'POST',
                 body: formData
             })
                 .then(response => response.json())
                 .then(data => {
-                console.log(data);
-                alert('Service Successfully Added By You.');
-                setAddService({});
-                setFile(null);
-                window.location.reload();
+                    alert('Service Successfully Added By You.');
+                    setAddService({});
+                    setFile(null);
+                    window.location.reload();
             })
                 .catch(error => {
                 console.error(error)

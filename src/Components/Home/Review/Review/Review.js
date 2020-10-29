@@ -7,7 +7,7 @@ const Review = () => {
     const [reviewerInfo, setReviewerInfo] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/review')
+        fetch('https://creative-agency-101.herokuapp.com/getReview')
         .then(res => res.json())
         .then(data => {
           if(data){

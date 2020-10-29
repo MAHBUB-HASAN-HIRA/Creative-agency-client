@@ -32,13 +32,12 @@ const OrderForm = () => {
         formData.append('price', orderDetail.price);
         formData.append('status', orderDetail.status);
       
-            fetch('http://localhost:5000/addOrder', {
+            fetch('https://creative-agency-101.herokuapp.com/addOrder', {
                 method: 'POST',
                 body: formData
             })
                 .then(response => response.json())
                 .then(data => {
-                console.log(data);
                 alert('order Successfully Placed. Thanks For Order');
                 setOrderDetail({});
                 setFile(null);

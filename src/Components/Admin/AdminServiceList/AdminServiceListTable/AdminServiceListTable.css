@@ -2,6 +2,7 @@
     background-color: #ffffff;
     border-radius: 20px;
     padding:30px 20px;
+    min-height: 300px;
 }
 .table_header{
     background-color: #F5F6FA;

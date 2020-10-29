@@ -11,7 +11,7 @@ const CustomerServiceList = () => {
   useEffect(() => {
     const userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
     if(userInfo.email){
-        fetch(`http://localhost:5000/serviceList?email=${userInfo.email}`,{
+        fetch(`https://creative-agency-101.herokuapp.com/serviceList?email=${userInfo.email}`,{
             method: 'GET',
             headers:{
                 'Content-Type' : 'application/json'

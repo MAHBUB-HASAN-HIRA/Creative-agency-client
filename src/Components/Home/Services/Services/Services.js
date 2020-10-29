@@ -7,14 +7,13 @@ const Services = () => {
     const [services, setServices] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/services')
+        fetch('https://creative-agency-101.herokuapp.com/services')
         .then(res => res.json())
         .then(data => {
           if(data){
             setServices(data);
           }});
     },[])
-console.log(services);
 
     return (
         <section className='mt-5 pt-5 mb-5 pb-5'>
