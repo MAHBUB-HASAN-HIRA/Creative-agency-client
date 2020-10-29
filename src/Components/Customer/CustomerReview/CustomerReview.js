@@ -5,7 +5,7 @@ import ReviewForm from './ReviewForm/ReviewForm';
 
 const CustomerReview = () => {
 
-    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    const [loggedInUser] = useContext(UserContext);
 
     return (
         <section>

@@ -32,7 +32,7 @@ const MakeAdminForm = () => {
                     <div className="row w-100">
                         <div className="form-row col-md-6 mb-3 ">
                             <label for='email'>Email</label>
-                            <input name='adminEmail' onChange={handleEmailChange} type="email" className='form-control' name="email" placeholder='admin@gmail.com' id="email"/>
+                            <input name='adminEmail' onChange={handleEmailChange} type="email" className='form-control' placeholder='admin@gmail.com' id="email"/>
                         </div>
                         <div className="form-row d-flex justify-content-start col-md-6 mb-3 ">
                             <div>

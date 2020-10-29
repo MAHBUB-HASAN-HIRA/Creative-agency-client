@@ -1,38 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Services.css';
 import ServicesCard from '../ServicesCard/ServicesCard';
-import services1 from '../../../../creative-agency-resources/images/icons/service1.png';
-import services2 from '../../../../creative-agency-resources/images/icons/service2.png';
-import services3 from '../../../../creative-agency-resources/images/icons/service3.png';
+import loadSpiner from '../../../../creative-agency-resources/images/loadSpiner.gif';
 
 const Services = () => {
+    const [services, setServices] = useState([]);
 
-    const services=[
-        {
-            title:'Web & Mobile Design',
-            description:'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident, eos.',
-            img:services1
-        },
-        {
-            title:'Graphic Design',
-            description:'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident, eos.',
-            img:services2
-        },
-        {
-            title:'Web Development',
-            description:'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident, eos.',
-            img:services3
-        }
-    ]
+    useEffect(() => {
+        fetch('http://localhost:5000/services')
+        .then(res => res.json())
+        .then(data => {
+          if(data){
+            setServices(data);
+          }});
+    },[])
+console.log(services);
 
     return (
         <section className='mt-5 pt-5 mb-5 pb-5'>
            <div className='container'>
                 <h1 className='text-center'>Provide Awesome <span style={{color:'#7AB259'}}>Services</span></h1>
                 <div className="row mt-5 mb-5">
-                    {
-                        services.slice(0,6).map(service => <ServicesCard service={service}/>)
-                    }
+                   {
+                       services.length > 0 
+                        ?
+                        services.slice(0,6).map(service => <ServicesCard key={service._id} service={service}/>)
+                        :
+                        <div className='text-center w-100'>
+                            <img className='loading_spin' src={loadSpiner} alt="loading"/>
+                        </div>
+                   }
                 </div>
            </div>
         </section>

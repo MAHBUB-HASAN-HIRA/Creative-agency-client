@@ -1,14 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Sidebar from '../../../Common/Sidebar/Sidebar';
-import services1 from '../../../../creative-agency-resources/images/icons/service1.png';
-import services2 from '../../../../creative-agency-resources/images/icons/service2.png';
-import services3 from '../../../../creative-agency-resources/images/icons/service3.png';
 import CustomerServiceListCard from '../CustomerServiceListCard/CustomerServiceListCard'
 import { UserContext } from '../../../../App';
 import loadSpiner from '../../../../creative-agency-resources/images/loadSpiner.gif';
 
 const CustomerServiceList = () => {
-    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    const [loggedInUser] = useContext(UserContext);
     const [serviceLists, setServiceLists] = useState([]);
    
   useEffect(() => {
