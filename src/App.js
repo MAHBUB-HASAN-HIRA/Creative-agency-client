@@ -28,7 +28,6 @@ function App() {
     }
   },[])
 
-  console.log(loggedInUser);
   return (
     <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
     <Router>

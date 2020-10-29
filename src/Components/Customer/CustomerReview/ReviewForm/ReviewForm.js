@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const ReviewForm = ({loggedInUser}) => {
 
-    const [review, setReview] = useState( );
+    const [review, setReview] = useState({});
 
      const handleChange = (e) => {
         const newReview = {...review, 'img': loggedInUser.photo};
