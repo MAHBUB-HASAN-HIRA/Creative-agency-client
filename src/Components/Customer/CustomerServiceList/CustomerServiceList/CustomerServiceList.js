@@ -1,45 +1,32 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Sidebar from '../../../Common/Sidebar/Sidebar';
 import services1 from '../../../../creative-agency-resources/images/icons/service1.png';
 import services2 from '../../../../creative-agency-resources/images/icons/service2.png';
 import services3 from '../../../../creative-agency-resources/images/icons/service3.png';
 import CustomerServiceListCard from '../CustomerServiceListCard/CustomerServiceListCard'
 import { UserContext } from '../../../../App';
+import loadSpiner from '../../../../creative-agency-resources/images/loadSpiner.gif';
 
 const CustomerServiceList = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-    const servicesLists = [
-        {
-            title:'Web & Mobile Design',
-            description:'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident, eos.',
-            img:services1,
-            status:"Pending"
-        },
-        {
-            title:'Graphic Design',
-            description:'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident, eos.',
-            img:services2,
-            status:"Done"
-        },
-        {
-            title:'Web Development',
-            description:'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident, eos.',
-            img:services3,
-            status:"On going"
-        },
-        {
-            title:'Web Development',
-            description:'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident, eos.',
-            img:services3,
-            status:"Done"
-        },
-        {
-            title:'Web Development',
-            description:'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident, eos.',
-            img:services3,
-            status:"Pending"
-        }
-    ]
+    const [serviceLists, setServiceLists] = useState([]);
+   
+  useEffect(() => {
+    const userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+    if(userInfo.email){
+        fetch(`http://localhost:5000/serviceList?email=${userInfo.email}`,{
+            method: 'GET',
+            headers:{
+                'Content-Type' : 'application/json'
+            ,"authorization" : `Bearer ${sessionStorage.getItem('token')}`
+            }
+        })
+        .then(res => res.json())
+        .then(data => setServiceLists(data))
+        .catch(error => console.log(error));
+    }
+  },[]);
+
 
     return (
         <section>
@@ -53,11 +40,18 @@ const CustomerServiceList = () => {
                      <h5>{loggedInUser.name}</h5>
                  </div>
                  <div  className='dashboard_right_container'>
-                     <div className="row">
-                        { 
-                            servicesLists.map(serviceList => <CustomerServiceListCard serviceList={serviceList}/>)
-                        }
-                     </div>
+                    {
+                        serviceLists.length > 0 ?
+                        <div className="row">
+                            { 
+                                serviceLists.map(serviceList => <CustomerServiceListCard serviceList={serviceList}/>)
+                            }
+                        </div>
+                        :
+                        <div className='text-center w-100'>
+                            <img className='loading_spin' src={loadSpiner} alt="loading"/>
+                        </div>
+                    }
                  </div>
              </div>
         </div>

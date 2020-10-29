@@ -21,6 +21,7 @@ const ReviewForm = ({loggedInUser}) => {
             .then(data => {
               if(data){
                 alert('Thank You For Your Review');
+                window.location.reload();
               }});
      }
 
@@ -30,7 +31,7 @@ const ReviewForm = ({loggedInUser}) => {
             <div className="form-group">
                 <input name='name' type="text" onChange={handleChange} className="form-control" placeholder="Your name / Company's name" required/>
             </div>
-            <div class="form-group">
+            <div className="form-group">
                 <input name='email' type="email" onChange={handleChange} className="form-control"  placeholder="Your email address" required/>
             </div>
             <div className="form-group">
