@@ -13,12 +13,12 @@ firebase.initializeApp(firebaseConfig);
 
 const Login = () => {
 
-    const {loggedInUser, setLoggedInUser} = useContext(UserContext)
+    const {loggedInUser, setLoggedInUser, isAdmin} = useContext(UserContext)
     
     const history = useHistory();
     const location = useLocation();
   
-    const { from } = location.state || { from: { pathname: "/" } };
+    const { from } = location.state || { from: { pathname: isAdmin ? '/admin/serviceList' : '/dashboard/serviceList'} };
 
   const handleGoogleSignIn = () =>{
         const googleProvider = new firebase.auth.GoogleAuthProvider();
