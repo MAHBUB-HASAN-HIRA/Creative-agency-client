@@ -5,7 +5,7 @@ import AddServiceForm from '../AddserviceForm/AddServiceForm';
 import './AddService.css';
 
 const AddService = () => {
-    const [loggedInUser] = useContext(UserContext);
+    const {loggedInUser} = useContext(UserContext);
     return (
         <section>
             <div className="row">

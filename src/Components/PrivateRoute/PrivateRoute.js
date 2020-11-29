@@ -5,7 +5,7 @@ import { UserContext } from '../../App';
 
 const PrivateRoute = ({children, ...rest}) => {
 
-    const [loggedInUser] = useContext(UserContext);
+    const {loggedInUser} = useContext(UserContext);
 
     const isLoggedIn = () => {
         const token = sessionStorage.getItem('token');

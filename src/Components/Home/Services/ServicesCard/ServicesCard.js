@@ -5,7 +5,7 @@ import './ServicesCard.css';
 const ServicesCard = ({service}) => {
     return (
             <div className='col-md-4 col-sm-6'>
-                <Link className='card_link' to='/customer/order'> 
+                <Link className='card_link' to='/dashboard/order'> 
                 <div className="card service_card mt-3 mb-3 text-center" >
                     <img className='w-25 ml-auto mr-auto card-img' src={`data:image/jpeg;base64,${service.image.img}`} alt="ServicePic"/>
                     <div className="card-body">

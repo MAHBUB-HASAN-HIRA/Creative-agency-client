@@ -1,24 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../../../App';
 import logo from '../../../creative-agency-resources/images/logos/logo.png';
 import './Nav.css';
 
 const Nav = () => {
+    const {loggedInUser, isAdmin, setLoggedInUser } = useContext(UserContext);
 
-    const handleCategories = () => {
-        //apply css for active page
-        var categoryLink = document.querySelector('.nav_Ul_container');
-        var nav_link = categoryLink.getElementsByClassName("nav-link");
-
-        for (var i = 0; i < 4; i++) {
-            nav_link[i].addEventListener("click", function() {
-                var current = document.getElementsByClassName("active");
-                current[0].className = current[0].className.replace(" active", "");
-                this.className += " active";
-            });
-
-        }
+    const handleLogout = () => {
+        setLoggedInUser({});
+        sessionStorage.removeItem('userInfo');
+        sessionStorage.removeItem('token');
     }
+
     return (
        <div className='container'>
             <nav className="navbar navbar-expand-lg navbar-light">
@@ -33,18 +27,29 @@ const Nav = () => {
                         <li className="nav-item active">
                             <Link className="nav-link" to='/'>Home</Link>
                         </li>
-                        <li>
-                            <Link onClick={handleCategories} className="nav-link" to='#'>Our Portfolio</Link>
-                        </li>
-                        <li>
-                            <Link onClick={handleCategories} className="nav-link" to='#'>Our Team</Link>
-                        </li>
-                        <li>
-                            <Link onClick={handleCategories} className="nav-link" to='#'>Contact Us</Link>
-                        </li>
-                        <li>
-                            <Link onClick={handleCategories} className="btn_brand" to='/login'>Login</Link>
-                        </li>
+                        { loggedInUser.email
+                            ?   <li>
+                                    <Link  className="nav-link" id='dashboard' to={isAdmin ? '/admin/serviceList' : '/dashboard/serviceList'}>Dashboard</Link>
+                                </li>
+                            :    <li>
+                                    <Link  className="nav-link" id='dashboard' to='/login'>Dashboard</Link>
+                                </li>
+                        }
+                        { loggedInUser.email &&
+                            <li id='user_name'>
+                                <h6>{loggedInUser.name}</h6>
+                            </li>
+                        }
+                        { loggedInUser.email
+                            ?  
+                                <li>
+                                   <Link onClick={handleLogout}  className="btn_brand" to='/login'>Logout</Link>
+                                </li>
+                            :    
+                                <li>
+                                    <Link  className="btn_brand" to='/login'>Login</Link>
+                                </li>
+                        }
                     </ul>
                 </div>
             </nav>

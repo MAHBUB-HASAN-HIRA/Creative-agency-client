@@ -8,7 +8,6 @@ import './App.css';
 import AddService from "./Components/Admin/AddServices/AddService/AddService";
 import AdminServiceList from "./Components/Admin/AdminServiceList/AdminServiceList/AdminServiceList";
 import MakeAdmin from "./Components/Admin/MakeAdmin/MakeAdmin";
-import CheckAdmin from "./Components/CheckAdmin/CheckAdmin";
 import CustomerReview from "./Components/Customer/CustomerReview/CustomerReview";
 import CustomerServiceList from "./Components/Customer/CustomerServiceList/CustomerServiceList/CustomerServiceList";
 import Order from "./Components/Customer/Order/Order";
@@ -20,42 +19,52 @@ import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
 export const UserContext = createContext();
 
 function App() {
-  const [loggedInUser, setLoggedInUser] = useState({});
-  
-  useEffect(() => {
-    const userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
-    if(userInfo){
-     setLoggedInUser(userInfo); 
-    }
 
-  },[])
+  const [loggedInUser, setLoggedInUser] = useState({});
+  const [isAdmin, setIsAdmin] = useState(false);
+  
+useEffect(() => {
+  const userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+  if(userInfo){
+    if(userInfo.email){
+      setLoggedInUser(userInfo);
+      fetch(`https://creative-agency-101.herokuapp.com/isAdmin?email=${userInfo.email}`)
+      .then(res => res.json())
+      .then(data => {
+          if(data){
+            setIsAdmin(true);
+          };
+        })
+      .catch(error => console.log(error));
+    };
+  };
+},[loggedInUser.email]);
 
   return (
-    <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
-    <CheckAdmin>
+    <UserContext.Provider value={{loggedInUser, setLoggedInUser, isAdmin}}>
     <Router>
       <Switch>
         <Route exact path='/'>
           <Home/>
         </Route>
-        <PrivateRoute path='/customer/order'>
+        <PrivateRoute path='/dashboard/order'>
           <Order/>
         </PrivateRoute>
-        <PrivateRoute path='/customer/serviceList'>
+        <PrivateRoute path='/dashboard/serviceList'>
           <CustomerServiceList/>
         </PrivateRoute>
-        <PrivateRoute path='/customer/review'>
+        <PrivateRoute path='/dashboard/review'>
           <CustomerReview/>
         </PrivateRoute>
-          <PrivateRoute path='/admin/serviceList'>
-            <AdminServiceList/>
-          </PrivateRoute>
-          <PrivateRoute path='/admin/addService'>
-            <AddService/>
-          </PrivateRoute>
-          <PrivateRoute path='/admin/makeAdmin'>
-            <MakeAdmin/>
-          </PrivateRoute>
+        <PrivateRoute path='/admin/serviceList'>
+          {isAdmin && <AdminServiceList/>}
+        </PrivateRoute>
+        <PrivateRoute path='/admin/addService'>
+          {isAdmin &&  <AddService/>}
+        </PrivateRoute>
+        <PrivateRoute path='/admin/makeAdmin'>
+          {isAdmin &&  <MakeAdmin/>}
+        </PrivateRoute>
         <Route path='/login'>
           <Login/>
         </Route>
@@ -64,7 +73,6 @@ function App() {
         </Route>
       </Switch>
     </Router>
-    </CheckAdmin>
     </UserContext.Provider>
   );
 }

@@ -13,13 +13,30 @@
 }
 .nav_Ul_container ul li:hover{
     -ms-transform: scale(1.1); 
-     -webkit-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
     transform: scale(1.1);  
 }
+
+#dashboard{
+    color: #000000;
+    font-weight: 600;
+}
+
+.nav_Ul_container ul #user_name h6{
+    font-size: 18px!important;
+}
+
+.nav_Ul_container ul #user_name:hover{
+    text-decoration: none!important;
+    -ms-transform: none; 
+    -webkit-transform: none; 
+    transform: none;
+}
+
 .nav-link{
     padding: 0 !important;
 }
-.active, .nav_link:hover{
+.active{
     text-decoration: none;
     font-size: 16px;
     font-weight: 600;
@@ -54,7 +71,7 @@
          -webkit-transform: scale(1);
         transform: scale(1);  
     }
-    .active, .nav_link:hover{
+    .active{
         text-decoration: none;
         border-bottom: none;   
     }

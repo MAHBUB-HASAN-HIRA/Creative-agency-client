@@ -3,11 +3,9 @@ import Sidebar from '../../../Common/Sidebar/Sidebar';
 import AdminServiceListTable from '../AdminServiceListTable/AdminServiceListTable';
 import loadSpiner from '../../../../creative-agency-resources/images/loadSpiner.gif';
 import { UserContext } from '../../../../App';
-import { AdminContext } from '../../../CheckAdmin/CheckAdmin';
 
 const AdminServiceList = () => {
-    const [loggedInUser] = useContext(UserContext);
-    const {isAdmin} = useContext(AdminContext);
+    const {loggedInUser, isAdmin} = useContext(UserContext);
     const [serviceLists, setServiceLists] = useState([]);
    
 const handleLoadAfterUpdateStatus = () => {

@@ -4,7 +4,7 @@ import uploadLogo from'../../../../creative-agency-resources/images/uploadLogo.P
 import { UserContext } from '../../../../App';
 
 const OrderForm = () => {
-    const [loggedInUser] = useContext(UserContext);
+    const {loggedInUser} = useContext(UserContext);
     const [orderDetail, setOrderDetail] = useState({});
     const [file, setFile] = useState(null);
 

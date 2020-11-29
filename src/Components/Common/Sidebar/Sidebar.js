@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import './Sidebar.css';
 import logo from'../../../creative-agency-resources/images/logos/logo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart, faCommentAlt, faGripVertical, faUserPlus, faPlus } from '@fortawesome/free-solid-svg-icons'
-import { AdminContext } from '../../CheckAdmin/CheckAdmin';
+import { faShoppingCart, faCommentAlt, faGripVertical, faUserPlus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { UserContext } from '../../../App';
 
 const Sidebar = () => {
 
-const isAdmin = useContext(AdminContext);
+const {isAdmin} = useContext(UserContext);
 
     return (
         <div>
@@ -34,13 +34,13 @@ const isAdmin = useContext(AdminContext);
                     :
                         <ul className='for_customer'>
                             <li>
-                                <Link className='sidebar_link' to="/customer/order"><FontAwesomeIcon icon={faShoppingCart} /> Order</Link>
+                                <Link className='sidebar_link' to="/dashboard/order"><FontAwesomeIcon icon={faShoppingCart} /> Order</Link>
                             </li>
                             <li>
-                                <Link className='sidebar_link' to="/customer/serviceList"><FontAwesomeIcon icon={faGripVertical} /> Service list</Link>
+                                <Link className='sidebar_link' to="/dashboard/serviceList"><FontAwesomeIcon icon={faGripVertical} /> Service list</Link>
                             </li>
                             <li>
-                                <Link className='sidebar_link' to="/customer/review"><FontAwesomeIcon icon={faCommentAlt}/> Review</Link>
+                                <Link className='sidebar_link' to="/dashboard/review"><FontAwesomeIcon icon={faCommentAlt}/> Review</Link>
                             </li>
                         </ul>
                    }

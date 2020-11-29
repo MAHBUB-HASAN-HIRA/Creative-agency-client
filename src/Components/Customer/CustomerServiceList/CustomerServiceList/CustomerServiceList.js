@@ -5,7 +5,7 @@ import { UserContext } from '../../../../App';
 import loadSpiner from '../../../../creative-agency-resources/images/loadSpiner.gif';
 
 const CustomerServiceList = () => {
-    const [loggedInUser] = useContext(UserContext);
+    const {loggedInUser} = useContext(UserContext);
     const [serviceLists, setServiceLists] = useState([]);
    
   useEffect(() => {

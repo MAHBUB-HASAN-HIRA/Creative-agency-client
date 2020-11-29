@@ -4,7 +4,7 @@ import Sidebar from '../../Common/Sidebar/Sidebar';
 import MakeAdminForm from './MakeAdminForm';
 
 const MakeAdmin = () => {
-    const [loggedInUser] = useContext(UserContext);
+    const {loggedInUser} = useContext(UserContext);
     return (
         <section>
             <div className="row">

@@ -5,7 +5,7 @@ import './Order.css';
 import OrderForm from './OrderForm/OrderForm';
 
 const Order = () => {
-    const [loggedInUser] = useContext(UserContext);
+    const {loggedInUser} = useContext(UserContext);
 
     return (
         <section>
