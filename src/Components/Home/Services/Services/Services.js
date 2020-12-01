@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './Services.css';
 import ServicesCard from '../ServicesCard/ServicesCard';
 import loadSpiner from '../../../../creative-agency-resources/images/loadSpiner.gif';
+import { UserContext } from '../../../../App';
 
 const Services = () => {
-    const [services, setServices] = useState([]);
+    const  {services, setServices} = useContext(UserContext);
 
     useEffect(() => {
         fetch('https://creative-agency-101.herokuapp.com/services')
@@ -13,7 +14,7 @@ const Services = () => {
           if(data){
             setServices(data);
           }});
-    },[])
+    },[]);
 
     return (
         <section className='mt-5 pt-5 mb-5 pb-5'>

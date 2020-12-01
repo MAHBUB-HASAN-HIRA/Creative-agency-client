@@ -1,41 +1,45 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useForm } from "react-hook-form";
 
 const ReviewForm = ({loggedInUser}) => {
+  
+    const { register, handleSubmit } = useForm();
+     const onSubmit = data => {
+        const newReview = {...data, 'img': loggedInUser.photo};
 
-    const [review, setReview] = useState({});
-
-     const handleChange = (e) => {
-        const newReview = {...review, 'img': loggedInUser.photo};
-        newReview[e.target.name] = e.target.value;
-        setReview(newReview)
-     }
-
-     const handleSubmit = (e) => {
-         e.preventDefault();
-         fetch('https://creative-agency-101.herokuapp.com/review', {
-                method:'POST',
-                headers:{'Content-Type': 'application/json'},
-                body:JSON.stringify(review)
-            })
-            .then(res => res.json())
-            .then(data => {
-              if(data){
-                alert('Thank You For Your Review');
-                window.location.reload();
-              }});
+        fetch('https://creative-agency-101.herokuapp.com/review?email=' + loggedInUser.email, {
+            method:'POST',
+            headers:{
+                'Content-Type' : 'application/json',
+                "authorization" : `Bearer ${sessionStorage.getItem('token')}`
+            },
+            body:JSON.stringify(newReview)
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data){
+            alert('Thank You For Your Review');
+            window.location.reload();
+            }})
+            .catch(error =>{
+                    alert('OPPS!!!. There are some trouble. Please Try again');
+            });
      }
 
     return (
-        <div className='form_container'>
-        <form onSubmit={handleSubmit}> 
+    <div className='form_container'>
+        <form onSubmit={handleSubmit(onSubmit)}> 
             <div className="form-group">
-                <input name='name' type="text" onChange={handleChange} className="form-control" placeholder="Your name / Company's name" required/>
+                <input name='name' defaultValue={loggedInUser.name} type="text" className="form-control" placeholder="Your name / Company's name" ref={register({ required: true })} />
             </div>
             <div className="form-group">
-                <input name='email' type="email" onChange={handleChange} className="form-control"  placeholder="Your email address" required/>
+                <input name='title' type="text" className="form-control" placeholder="Your Title / Position" ref={register({ required: true })} />
             </div>
             <div className="form-group">
-                <textarea name='review_text' onChange={handleChange}  className="form-control" placeholder='Description' rows="4" required/>
+                <input name='email' defaultValue={loggedInUser.email} type="email" className="form-control"  placeholder="Your email address" ref={register({ required: true })} />
+            </div>
+            <div className="form-group">
+                <textarea name='review_text'  className="form-control" placeholder='Description' rows="4" ref={register({ required: true })} />
             </div>
             <button type="submit" className="btn_brand">Submit</button>
         </form>

@@ -2,70 +2,75 @@ import React, { useContext, useState } from 'react';
 import './OrderForm.css';
 import uploadLogo from'../../../../creative-agency-resources/images/uploadLogo.PNG';
 import { UserContext } from '../../../../App';
+import { useForm } from "react-hook-form";
 
 const OrderForm = () => {
     const {loggedInUser} = useContext(UserContext);
-    const [orderDetail, setOrderDetail] = useState({});
     const [file, setFile] = useState(null);
-
-    const handleChange = (e) => {
-       const newOrderDetail = {...orderDetail};
-       newOrderDetail[e.target.name] = e.target.value;
-       newOrderDetail['status'] = 'Pending';
-       setOrderDetail(newOrderDetail);
-    }
+    const service = JSON.parse(sessionStorage.getItem('service'));
+    const { register, handleSubmit} = useForm();
 
     const handleFileChange = (e) => {
         const newFile = e.target.files[0];
         setFile(newFile);
     }
 
-    const handleOrderDetailSubmit = (e) => {
-        e.preventDefault();
-        const formData = new FormData()
-        formData.append('file', file);
-        formData.append('name', orderDetail.name);
-        formData.append('orderEmail', orderDetail.orderEmail);
+const handleOrderDetailSubmit = data => {
+    if(file || service){
+        const formData = new FormData();
+        const newOrderDetail = {...data, };
+        const newFile = file ? file : JSON.stringify(service.image);
+        formData.append('file', newFile);
+        formData.append('name', newOrderDetail.name);
+        formData.append('orderEmail', newOrderDetail.orderEmail);
         formData.append('userEmail', loggedInUser.email);
-        formData.append('service', orderDetail.service);
-        formData.append('message', orderDetail.message);
-        formData.append('price', orderDetail.price);
-        formData.append('status', orderDetail.status);
-      
-            fetch('https://creative-agency-101.herokuapp.com/addOrder', {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => response.json())
-                .then(data => {
+        formData.append('service', newOrderDetail.service);
+        formData.append('message', newOrderDetail.message);
+        formData.append('price', newOrderDetail.price);
+        formData.append('status', 'Pending');
+        
+        fetch('https://creative-agency-101.herokuapp.com/addOrder', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data){
                 alert('order Successfully Placed. Thanks For Order');
-                setOrderDetail({});
                 setFile(null);
+                sessionStorage.removeItem('service');
                 window.location.reload();
-            })
-                .catch(error => {
-                console.error(error)
-            })
+            };
+        })
+        .catch(error => {
+            if(error){
+                alert('OPPS!!! There are some problem. Please try again');
+            }; 
+        });  
     }
+    else{
+        alert('Please upload project image.');
+    };
+};
 
     return (
         <div className='form_container'>
-            <form onSubmit={handleOrderDetailSubmit}> 
+            <form onSubmit={handleSubmit(handleOrderDetailSubmit)}> 
                 <div className="form-group">
-                    <input type="text" onChange={handleChange} name='name' className="form-control"  placeholder="Your name / Company's name" required/>
+                    <input type="text" defaultValue={loggedInUser.name} name='name' className="form-control"  placeholder="Your name / Company's name" ref={register({ required: true })}/>
                 </div>
                 <div className="form-group">
-                    <input type="email" onChange={handleChange} name='orderEmail' className="form-control"  placeholder="Your email address" required/>
+                    <input type="email" defaultValue={loggedInUser.email} name='orderEmail' className="form-control"  placeholder="Your email address" ref={register({ required: true })}/>
                 </div>
                 <div className="form-group">
-                    <input type="text" onChange={handleChange} name='service' className="form-control"  placeholder="Service Name" required/>
+                    <input type="text" defaultValue={service && service.title} name='service' className="form-control"  placeholder="Service Name" ref={register({ required: true })}/>
                 </div>
                 <div className="form-group">
-                    <textarea  onChange={handleChange} name='message' className="form-control" placeholder='Your message' rows="4"  required/>
+                    <textarea  name='message' className="form-control" placeholder='Your message' rows="4"  ref={register({ required: true })}/>
                 </div>
                 <div className="form-row mb-3 d-flex align-items-center">
                     <div className="form-group col-sm-6 my-1">
-                        <input type="text" onChange={handleChange} name='price' className="form-control" placeholder="Price" required/>
+                        <input type="number" defaultValue={service && service.price} name='price' className="form-control" placeholder="Price" ref={register({ required: true })}/>
                     </div>
                     <div className="form-group col-sm-6 my-1">
                         <input type="file" onChange={handleFileChange} name="file" id="file-1" className="inputFile inputFile-1" data-multiple-caption="{count} files selected" multiple=""/>

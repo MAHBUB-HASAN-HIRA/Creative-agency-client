@@ -4,10 +4,11 @@
    border-radius: 20px;
     padding:30px;
 }
-#services_title{
+#services_title, #services_price{
     border:1px solid #C9C9C9;
     border-radius: 5px;
 }
+
 #services_des{
     border:1px solid #C9C9C9;
     border-radius: 5px;  

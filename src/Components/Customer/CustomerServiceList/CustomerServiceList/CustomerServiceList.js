@@ -7,20 +7,37 @@ import loadSpiner from '../../../../creative-agency-resources/images/loadSpiner.
 const CustomerServiceList = () => {
     const {loggedInUser} = useContext(UserContext);
     const [serviceLists, setServiceLists] = useState([]);
-   
+
+const handleLoadServiceLists = () => {
+    const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+    const token =  sessionStorage.getItem('token');
+    if(userInfo){
+        if(userInfo.email && token){
+            fetch(`https://creative-agency-101.herokuapp.com/serviceList?email=${userInfo.email}`,{
+                method: 'GET',
+                headers:{
+                    'Content-Type' : 'application/json',
+                    "authorization" : `Bearer ${sessionStorage.getItem('token')}`
+                }
+            })
+            .then(res => res.json())
+            .then(data => setServiceLists(data))
+            .catch(error => console.log(error));
+        }
+    }
+}
+
+
+
   useEffect(() => {
-    const userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
-    if(userInfo.email){
-        fetch(`https://creative-agency-101.herokuapp.com/serviceList?email=${userInfo.email}`,{
-            method: 'GET',
-            headers:{
-                'Content-Type' : 'application/json'
-            ,"authorization" : `Bearer ${sessionStorage.getItem('token')}`
-            }
-        })
-        .then(res => res.json())
-        .then(data => setServiceLists(data))
-        .catch(error => console.log(error));
+    const token =  sessionStorage.getItem('token');
+    if(!token){
+        setTimeout(() => {
+            handleLoadServiceLists();
+        }, 3000);
+    }
+    if(token){
+        handleLoadServiceLists();
     }
   },[]);
 

@@ -5,11 +5,11 @@ import notFoundPic from '../../creative-agency-resources/images/404.png';
 const NotFound = () => {
     return (
         <div className='container pt-3 '>
-            <div className='text-center'>
+            <div className='text-center mt-5'>
                 <Link className='text-white' to='/'><button className='btn_brand'>Home</button></Link>
             </div>
-            <div className='w-100'>
-                <img className='w-75 img-fluid' style={{margin:'20px 150px'}} src={notFoundPic} alt=""/>
+            <div className='w-100 mt-3'>
+                <img className='w-75 d-block img-fluid ml-auto mr-auto' src={notFoundPic} alt=""/>
             </div>
         </div>
     );

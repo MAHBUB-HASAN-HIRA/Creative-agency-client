@@ -5,27 +5,38 @@ import loadSpiner from '../../../../creative-agency-resources/images/loadSpiner.
 import { UserContext } from '../../../../App';
 
 const AdminServiceList = () => {
-    const {loggedInUser, isAdmin} = useContext(UserContext);
+    const {loggedInUser} = useContext(UserContext);
     const [serviceLists, setServiceLists] = useState([]);
    
-const handleLoadAfterUpdateStatus = () => {
-    const userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
-    if(userInfo.email){
-        fetch(`https://creative-agency-101.herokuapp.com/serviceList?email=${userInfo.email}`,{
-            method: 'GET',
-            headers:{
-                'Content-Type' : 'application/json'
-            ,"authorization" : `Bearer ${sessionStorage.getItem('token')}`
-            }
-        })
-        .then(res => res.json())
-        .then(data => setServiceLists(data))
-        .catch(error => console.log(error));
+const handleLoadServiceList = () => {
+    const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+    const token =  sessionStorage.getItem('token');
+    if(userInfo){
+        if(userInfo.email && token){
+            fetch(`https://creative-agency-101.herokuapp.com/serviceList?email=${userInfo.email}`,{
+                method: 'GET',
+                headers:{
+                    'Content-Type' : 'application/json',
+                    "authorization" : `Bearer ${sessionStorage.getItem('token')}`
+                }
+            })
+            .then(res => res.json())
+            .then(data => setServiceLists(data))
+            .catch(error => console.log(error));
+        }
     }
 }
-    useEffect(() => {
-        handleLoadAfterUpdateStatus();
-    },[]);
+useEffect(() => {
+    const token =  sessionStorage.getItem('token');
+    if(!token){
+        setTimeout(() =>{
+            handleLoadServiceList();
+        }, 3000);
+    }
+    if(token){
+        handleLoadServiceList();
+    }
+},[]);
     
     return (
         <section>
@@ -58,7 +69,7 @@ const handleLoadAfterUpdateStatus = () => {
                                     </thead>
                         
                                         {
-                                            serviceLists.map( userInfo => <AdminServiceListTable handleLoadAfterUpdateStatus={handleLoadAfterUpdateStatus} userInfo={userInfo}/>)
+                                            serviceLists.map( userInfo => <AdminServiceListTable key={userInfo._id} loggedInUser={loggedInUser} userInfo={userInfo}/>)
                                         }
                                     
                                 </table> 

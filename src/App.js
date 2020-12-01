@@ -21,6 +21,7 @@ export const UserContext = createContext();
 function App() {
 
   const [loggedInUser, setLoggedInUser] = useState({});
+  const [services, setServices] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
   
 useEffect(() => {
@@ -41,20 +42,20 @@ useEffect(() => {
 },[loggedInUser.email]);
 
   return (
-    <UserContext.Provider value={{loggedInUser, setLoggedInUser, isAdmin}}>
+    <UserContext.Provider value={{loggedInUser, setLoggedInUser, isAdmin, services, setServices}}>
     <Router>
       <Switch>
         <Route exact path='/'>
           <Home/>
         </Route>
         <PrivateRoute path='/dashboard/order'>
-          <Order/>
+         {!isAdmin && <Order/>}
         </PrivateRoute>
         <PrivateRoute path='/dashboard/serviceList'>
-          <CustomerServiceList/>
+         {isAdmin ? <AdminServiceList/> : <CustomerServiceList/>}
         </PrivateRoute>
         <PrivateRoute path='/dashboard/review'>
-          <CustomerReview/>
+          {!isAdmin && <CustomerReview/>}
         </PrivateRoute>
         <PrivateRoute path='/admin/serviceList'>
           {isAdmin && <AdminServiceList/>}

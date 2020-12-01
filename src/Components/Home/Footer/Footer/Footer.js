@@ -14,7 +14,7 @@ const Footer = () => {
                         <FooterForm/>
                     </div>
                </div>
-               <p className='mt-3 text-center'>copyright Orange labs 2020</p>
+               <p className='mt-3 text-center'>Copyright Creative Agency 2020</p>
            </div>
        </section>
     );

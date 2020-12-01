@@ -1,29 +1,45 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { UserContext } from '../../../App';
 import './MakeAdminForm.css';
 
 const MakeAdminForm = () => {
-    const [adminEmail, setAdminEmail] = useState('')
+
+    const {loggedInUser} = useContext(UserContext);
+    const [adminEmail, setAdminEmail] = useState('');
     const handleEmailChange = (e) => {
         const newEmail = {...adminEmail}
         newEmail[e.target.name] = e.target.value;
         setAdminEmail(newEmail);
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        fetch('https://creative-agency-101.herokuapp.com/makeAdmin', {
-                method:'POST',
-                headers:{'Content-Type': 'application/json'},
-                body:JSON.stringify(adminEmail)
-            })
-            .then(res => res.json())
-            .then(data => {
-              if(data){
+const handleSubmit = (e) => {
+    e.preventDefault();
+    if(adminEmail){
+        fetch('https://creative-agency-101.herokuapp.com/makeAdmin?email='+ loggedInUser.email, {
+            method:'POST',
+            headers:{
+                'Content-Type' : 'application/json',
+                "authorization" : `Bearer ${sessionStorage.getItem('token')}`
+            },
+            body:JSON.stringify(adminEmail)
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data){
                 alert('Admin Successfully Added by You');
                 setAdminEmail('');
                 window.location.reload();
-              }});
+            }
+        })
+        .catch(error => {
+            alert('OPPS!!! There are some problem. Please try again')
+        });
     }
+    else{
+        alert('Please fillUp email Field');
+    }
+    
+};
 
 
     return (

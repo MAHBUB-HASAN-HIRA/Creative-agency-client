@@ -49,19 +49,10 @@ const Login = () => {
     }
 
     const handleSignOut = () => {
-         firebase.auth().signOut()
-            .then(res =>  {
-                    const signOutUser ={
-                    name:null,
-                    email:null,
-                    isSignIn:false,
-                    photo:null,
-                };
-                setLoggedInUser(signOutUser);
-                sessionStorage.setItem('token','');
-                sessionStorage.setItem(`userInfo`, JSON.stringify(signOutUser));
-            })
-        }
+        setLoggedInUser({});
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem(`userInfo`);
+    }
 
 
     return (
