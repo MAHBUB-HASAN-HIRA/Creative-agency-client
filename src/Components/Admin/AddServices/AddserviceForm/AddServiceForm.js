@@ -9,11 +9,6 @@ const AddServiceForm = () => {
     const [file, setFile] = useState(null);
     const { register, handleSubmit } = useForm();
 
-    // const handleChange = (e) => {
-    //    const newService = {...addService};
-    //    newService[e.target.name] = e.target.value;
-    //    setAddService(newService);
-    // }
 
     const handleFileChange = (e) => {
         const newFile = e.target.files[0];
